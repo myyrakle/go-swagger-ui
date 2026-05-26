@@ -1,3 +1,3 @@
 module github.com/myyrakle/go-swagger-ui
 
-go 1.25.4
+go 1.21
