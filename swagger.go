@@ -7,10 +7,10 @@ import (
 	"encoding/base64"
 )
 
-// favicon16PNG, favicon32PNG는 favicon.go에 base64로 선언된 PNG를 디코드한 바이트입니다.
+// Favicon16PNG, Favicon32PNG는 favicon.go에 base64로 선언된 PNG를 디코드한 바이트입니다.
 var (
-	favicon16PNG = mustDecodeBase64(Favicon16)
-	favicon32PNG = mustDecodeBase64(Favicon32)
+	Favicon16PNG = mustDecodeBase64(Favicon16)
+	Favicon32PNG = mustDecodeBase64(Favicon32)
 )
 
 func mustDecodeBase64(s string) []byte {
@@ -94,41 +94,3 @@ const IndexHTML = `<!DOCTYPE html>
   </script>
 </body>
 </html>`
-
-// Handler는 임베드된 Swagger UI 리소스를 서빙하는 echo 핸들러입니다.
-//
-// `/swagger/*` 와 같이 catch-all 라우트로 등록하여 사용합니다.
-// 처리 경로:
-//   - "" (트레일링 슬래시 접근) → index.html 로 리다이렉트
-//   - index.html               → 임베드된 엔트리 HTML
-//   - swagger-ui.css, index.css → 임베드된 CSS
-//   - swagger-ui-bundle.js, swagger-ui-standalone-preset.js → 임베드된 JS
-//
-// index.html은 ./doc.json 상대 경로로 스펙을 로드하므로,
-// 같은 prefix 하위에 doc.json 응답 핸들러를 별도로 등록해야 합니다.
-// func Handler(c echo.Context) error {
-// 	file := c.Param("*")
-// 	if file == "" {
-// 		base := strings.TrimSuffix(c.Request().URL.Path, "/")
-// 		return c.Redirect(http.StatusMovedPermanently, base+"/index.html")
-// 	}
-
-// 	switch file {
-// 	case "index.html":
-// 		return c.HTMLBlob(http.StatusOK, []byte(IndexHTML))
-// 	case "swagger-ui.css":
-// 		return c.Blob(http.StatusOK, "text/css; charset=utf-8", []byte(SwaggerUICSS))
-// 	case "index.css":
-// 		return c.Blob(http.StatusOK, "text/css; charset=utf-8", []byte(IndexCSS))
-// 	case "swagger-ui-bundle.js":
-// 		return c.Blob(http.StatusOK, "application/javascript; charset=utf-8", []byte(SwaggerUIBundleJS))
-// 	case "swagger-ui-standalone-preset.js":
-// 		return c.Blob(http.StatusOK, "application/javascript; charset=utf-8", []byte(SwaggerUIStandalonePresetJS))
-// 	case "favicon-16x16.png":
-// 		return c.Blob(http.StatusOK, "image/png", favicon16PNG)
-// 	case "favicon-32x32.png":
-// 		return c.Blob(http.StatusOK, "image/png", favicon32PNG)
-// 	}
-
-// 	return echo.ErrNotFound
-// }
