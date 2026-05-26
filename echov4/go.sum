@@ -9,8 +9,8 @@ github.com/mattn/go-colorable v0.0.9 h1:UVL0vNpWh04HeJXV0KLcaT7r06gOH2l4OW6ddYRU
 github.com/mattn/go-colorable v0.0.9/go.mod h1:9vuHe8Xs5qXnSaW/c/ABM9alt+Vo+STaOChaDxuIBZU=
 github.com/mattn/go-isatty v0.0.4 h1:bnP0vzxcAdeI1zdubAl5PjU6zsERjGZb7raWodagDYs=
 github.com/mattn/go-isatty v0.0.4/go.mod h1:M+lRXTBqGeGNdLjl/ufCoiOlB5xdOkqRJdNxMWT7Zi4=
-github.com/myyrakle/go-swagger-ui v0.0.2 h1:OkqgLAnjVgKWjZPqqeABr39MQ/Y1gAL2dqUuxX6g0lU=
-github.com/myyrakle/go-swagger-ui v0.0.2/go.mod h1:oXyEyetG/r7/QLZPlJdeAmwj8/Ysi6ECfvD6ZuQG8BA=
+github.com/myyrakle/go-swagger-ui v0.1.0 h1:HyqFFh60ucB6RwH7qqr4JufqTkIaWn25bOWkk+W4bQY=
+github.com/myyrakle/go-swagger-ui v0.1.0/go.mod h1:oXyEyetG/r7/QLZPlJdeAmwj8/Ysi6ECfvD6ZuQG8BA=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
