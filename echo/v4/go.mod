@@ -1,4 +1,4 @@
-module github.com/myyrakle/go-swagger-ui/echo/v4
+module github.com/myyrakle/go-swagger-ui/echov4
 
 go 1.16
 
