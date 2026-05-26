@@ -36,9 +36,9 @@ var SwaggerUIBundleJS string
 //go:embed dist/swagger-ui-standalone-preset.js
 var SwaggerUIStandalonePresetJS string
 
-// IndexHTML은 임베드된 자산을 로드하고 같은 prefix의 ./doc.json을 스펙으로 사용하는
+// JSONIndexHTML은 임베드된 자산을 로드하고 같은 prefix의 ./doc.json을 스펙으로 사용하는
 // Swagger UI 엔트리 HTML입니다.
-const IndexHTML = `<!DOCTYPE html>
+const JSONIndexHTML = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -94,3 +94,65 @@ const IndexHTML = `<!DOCTYPE html>
   </script>
 </body>
 </html>`
+
+// YAMLIndexHTML은 임베드된 자산을 로드하고 같은 prefix의 ./doc.yaml을 스펙으로 사용하는
+// Swagger UI 엔트리 HTML입니다.
+const YAMLIndexHTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Swagger UI</title>
+  <link rel="stylesheet" type="text/css" href="./swagger-ui.css" />
+  <link rel="stylesheet" type="text/css" href="./index.css" />
+  <link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="./favicon-16x16.png" sizes="16x16" />
+  <script>
+    (function () {
+      var origMatchMedia = window.matchMedia.bind(window);
+      window.matchMedia = function (query) {
+        if (typeof query === "string" && query.indexOf("prefers-color-scheme: dark") !== -1) {
+          return {
+            matches: false,
+            media: query,
+            onchange: null,
+            addListener: function () {},
+            removeListener: function () {},
+            addEventListener: function () {},
+            removeEventListener: function () {},
+            dispatchEvent: function () { return false; },
+          };
+        }
+        return origMatchMedia(query);
+      };
+    })();
+  </script>
+</head>
+<body>
+  <div id="swagger-ui"></div>
+  <script src="./swagger-ui-bundle.js" charset="UTF-8"></script>
+  <script src="./swagger-ui-standalone-preset.js" charset="UTF-8"></script>
+  <script>
+    window.onload = function() {
+      window.ui = SwaggerUIBundle({
+        url: "./doc.yaml",
+        dom_id: '#swagger-ui',
+        deepLinking: true,
+        docExpansion: "list",
+        persistAuthorization: false,
+        syntaxHighlight: true,
+        presets: [
+          SwaggerUIBundle.presets.apis,
+          SwaggerUIStandalonePreset,
+        ],
+        plugins: [
+          SwaggerUIBundle.plugins.DownloadUrl,
+        ],
+        layout: "StandaloneLayout",
+      });
+    };
+  </script>
+</body>
+</html>`
+
+// IndexHTML은 기존 사용자를 위한 JSONIndexHTML 별칭입니다.
+const IndexHTML = JSONIndexHTML

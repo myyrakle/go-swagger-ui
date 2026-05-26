@@ -8,6 +8,9 @@ import (
 	swagger "github.com/myyrakle/go-swagger-ui"
 )
 
+func Setup(e *echo.Echo, prefix string) {
+}
+
 // Handler는 임베드된 Swagger UI 리소스를 서빙하는 echo 핸들러입니다.
 //
 // `/swagger/*` 와 같이 catch-all 라우트로 등록하여 사용합니다.
