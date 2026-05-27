@@ -1,14 +1,16 @@
-package swagger
+package echov4swagger
 
 import (
+	"encoding/json"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
 	swagger "github.com/myyrakle/go-swagger-ui"
 )
 
+// /
 func Serve(e *echo.Echo, prefix string, specBytes []byte) {
-	contentType := http.DetectContentType(specBytes)
+	isJSON := json.Valid(specBytes)
 
 	e.GET(prefix+"*",
 		func(c echo.Context) error {
@@ -19,10 +21,9 @@ func Serve(e *echo.Echo, prefix string, specBytes []byte) {
 				fallthrough
 			case "index.html":
 
-				switch contentType {
-				case "application/json":
+				if isJSON {
 					return c.HTMLBlob(http.StatusOK, []byte(swagger.JSONIndexHTML))
-				default:
+				} else {
 					return c.HTMLBlob(http.StatusOK, []byte(swagger.YAMLIndexHTML))
 				}
 			case "swagger-ui.css":
