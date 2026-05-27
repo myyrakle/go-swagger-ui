@@ -3,6 +3,7 @@ package echov4swagger
 import (
 	"encoding/json"
 	"net/http"
+	"strings"
 
 	"github.com/labstack/echo/v4"
 	swagger "github.com/myyrakle/go-swagger-ui"
@@ -16,6 +17,13 @@ import (
 // matching doc.json or doc.yaml endpoint under the same prefix.
 func Serve(e *echo.Echo, prefix string, specBytes []byte) {
 	isJSON := json.Valid(specBytes)
+	prefix = normalizePrefix(prefix)
+
+	if prefix != "/" {
+		e.GET(strings.TrimSuffix(prefix, "/"), func(c echo.Context) error {
+			return c.Redirect(http.StatusMovedPermanently, prefix)
+		})
+	}
 
 	e.GET(prefix+"*",
 		func(c echo.Context) error {
@@ -74,4 +82,14 @@ func Serve(e *echo.Echo, prefix string, specBytes []byte) {
 			return c.Blob(http.StatusOK, "application/x-yaml; charset=utf-8", docBytes)
 		})
 	}
+}
+
+func normalizePrefix(prefix string) string {
+	if prefix == "" || prefix == "/" {
+		return "/"
+	}
+	if !strings.HasPrefix(prefix, "/") {
+		prefix = "/" + prefix
+	}
+	return strings.TrimRight(prefix, "/") + "/"
 }

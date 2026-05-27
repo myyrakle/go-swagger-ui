@@ -19,21 +19,63 @@ import (
 	swagger "github.com/myyrakle/go-swagger-ui/echov4"
 )
 
-func newEchoServer() *echo.Echo {
+func main() {
 	e := echo.New()
-	e.HideBanner = true
-	e.HidePort = true
 
-	e.GET("/*", swagger.Handler)
+	data, err := os.ReadFile("docs/swagger.json")
+	if err != nil {
+		panic(err)
+	}
 
-	e.GET("/doc.json", func(c echo.Context) error {
-		data, err := os.ReadFile("doc.json")
-		if err != nil {
-			return echo.NewHTTPError(500, "failed to read doc.json")
-		}
-		return c.Blob(200, echo.MIMEApplicationJSONCharsetUTF8, data)
-	})
+    // auto detect json
+	swagger.Serve(e, "/docs", data)
 
-	return e
+	addr := os.Getenv("ADDR")
+	if addr == "" {
+		addr = ":28080"
+	}
+
+	log.Printf("echo server listening on %s", addr)
+	if err := e.Start(addr); err != nil {
+		log.Fatal(err)
+	}
 }
+
+```
+
+## with swagger YAML file 
+
+```go
+package main
+
+import (
+	"log"
+	"os"
+
+	"github.com/labstack/echo/v4"
+	swagger "github.com/myyrakle/go-swagger-ui/echov4"
+)
+
+func main() {
+	e := echo.New()
+
+	data, err := os.ReadFile("docs/swagger.yaml")
+	if err != nil {
+		panic(err)
+	}
+
+    // auto detect
+	swagger.Serve(e, "/docs", data)
+
+	addr := os.Getenv("ADDR")
+	if addr == "" {
+		addr = ":28080"
+	}
+
+	log.Printf("echo server listening on %s", addr)
+	if err := e.Start(addr); err != nil {
+		log.Fatal(err)
+	}
+}
+
 ```
