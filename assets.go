@@ -75,7 +75,7 @@ const JSONIndexHTML = `<!DOCTYPE html>
   <script>
     window.onload = function() {
       window.ui = SwaggerUIBundle({
-        url: "./doc.json",
+        url: "./doc.json" + window.location.search,
         dom_id: '#swagger-ui',
         deepLinking: true,
         docExpansion: "list",
@@ -134,7 +134,7 @@ const YAMLIndexHTML = `<!DOCTYPE html>
   <script>
     window.onload = function() {
       window.ui = SwaggerUIBundle({
-        url: "./doc.yaml",
+        url: "./doc.yaml" + window.location.search,
         dom_id: '#swagger-ui',
         deepLinking: true,
         docExpansion: "list",

@@ -26,6 +26,16 @@ info:
 	}
 }
 
+func TestIndexHTMLSpecURLsPreserveQueryString(t *testing.T) {
+	if !strings.Contains(JSONIndexHTML, `url: "./doc.json" + window.location.search`) {
+		t.Fatal("JSONIndexHTML should forward the page query string to ./doc.json")
+	}
+
+	if !strings.Contains(YAMLIndexHTML, `url: "./doc.yaml" + window.location.search`) {
+		t.Fatal("YAMLIndexHTML should forward the page query string to ./doc.yaml")
+	}
+}
+
 func yamlSchemes(t *testing.T, source string) []string {
 	t.Helper()
 

@@ -51,25 +51,27 @@ func Serve(e *echo.Echo, prefix string, specBytes []byte) {
 
 	if isJSON {
 		e.GET(prefix+"doc.json", func(c echo.Context) error {
-			scheme := c.QueryParam("scheme")
+			docBytes := specBytes
+			scheme := c.Scheme()
 			if scheme == "http" {
-				specBytes, _ = swagger.PreprocessSchemeInJSONSpec(specBytes, swagger.SchemeHTTP)
+				docBytes, _ = swagger.PreprocessSchemeInJSONSpec(specBytes, swagger.SchemeHTTP)
 			} else {
-				specBytes, _ = swagger.PreprocessSchemeInJSONSpec(specBytes, swagger.SchemeHTTPS)
+				docBytes, _ = swagger.PreprocessSchemeInJSONSpec(specBytes, swagger.SchemeHTTPS)
 			}
 
-			return c.Blob(http.StatusOK, "application/json; charset=utf-8", specBytes)
+			return c.Blob(http.StatusOK, "application/json; charset=utf-8", docBytes)
 		})
 	} else {
 		e.GET(prefix+"doc.yaml", func(c echo.Context) error {
-			scheme := c.QueryParam("scheme")
+			docBytes := specBytes
+			scheme := c.Scheme()
 			if scheme == "http" {
-				specBytes, _ = swagger.PreprocessSchemeInYAMLSpec(specBytes, swagger.SchemeHTTP)
+				docBytes, _ = swagger.PreprocessSchemeInYAMLSpec(specBytes, swagger.SchemeHTTP)
 			} else {
-				specBytes, _ = swagger.PreprocessSchemeInYAMLSpec(specBytes, swagger.SchemeHTTPS)
+				docBytes, _ = swagger.PreprocessSchemeInYAMLSpec(specBytes, swagger.SchemeHTTPS)
 			}
 
-			return c.Blob(http.StatusOK, "application/x-yaml; charset=utf-8", specBytes)
+			return c.Blob(http.StatusOK, "application/x-yaml; charset=utf-8", docBytes)
 		})
 	}
 }
