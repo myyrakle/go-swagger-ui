@@ -2,63 +2,27 @@ package swagger
 
 import (
 	"net/http"
-	"strings"
 
 	"github.com/labstack/echo/v4"
 	swagger "github.com/myyrakle/go-swagger-ui"
 )
 
-type SpecFormat string
+func Serve(e *echo.Echo, prefix string, specBytes []byte) {
+	contentType := http.DetectContentType(specBytes)
 
-const (
-	JSON SpecFormat = "json"
-	YAML SpecFormat = "yaml"
-)
-
-type SpecSource interface {
-	Format() SpecFormat
-	Content() []byte
-}
-
-type SpecSourceJSON struct {
-	JSON []byte
-}
-
-func (s SpecSourceJSON) Format() SpecFormat {
-	return JSON
-}
-
-func (s SpecSourceJSON) Content() []byte {
-	return s.JSON
-}
-
-type SpecSourceYAML struct {
-	YAML []byte
-}
-
-func (s SpecSourceYAML) Format() SpecFormat {
-	return YAML
-}
-
-func (s SpecSourceYAML) Content() []byte {
-	return s.YAML
-}
-
-func Setup(e *echo.Echo, prefix string, format SpecFormat) {
 	e.GET(prefix+"*",
 		func(c echo.Context) error {
 			file := c.Param("*")
-			if file == "" {
-				base := strings.TrimSuffix(c.Request().URL.Path, "/")
-				return c.Redirect(http.StatusMovedPermanently, base+"/index.html")
-			}
 
 			switch file {
+			case "":
+				fallthrough
 			case "index.html":
-				switch format {
-				case JSON:
+
+				switch contentType {
+				case "application/json":
 					return c.HTMLBlob(http.StatusOK, []byte(swagger.JSONIndexHTML))
-				case YAML:
+				default:
 					return c.HTMLBlob(http.StatusOK, []byte(swagger.YAMLIndexHTML))
 				}
 			case "swagger-ui.css":
