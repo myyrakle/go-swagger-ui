@@ -1,4 +1,4 @@
-# echo v5 module
+# echo v5 swagger ui
 
 - Swagger UI server for Echo v5 users
 - Minimum version: Echo v5.0.0, Go 1.25.0
@@ -6,7 +6,7 @@
 ## Setup
 
 ```sh
-go get github.com/myyrakle/go-swagger-ui/echov5@v0.1.4
+go get github.com/myyrakle/go-swagger-ui/echov5@v0.1.8
 ```
 
 ## With Swagger JSON File

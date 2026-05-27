@@ -1,11 +1,11 @@
-# echo v4 modules
+# echo v4 swagger ui
 - swagger ui server for echo/v4 user
 - minimum version: echo/v4.0.0, golang/v1.16.0
 
 ## Setup 
 
 ```
-go get github.com/myyrakle/go-swagger-ui/echov4@v0.0.2
+go get github.com/myyrakle/go-swagger-ui/echov4@v0.1.8
 ```
 
 ## with swagger JSON file 
