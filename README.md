@@ -12,3 +12,4 @@ For generation, use tools like [swaggo](https://github.com/swaggo/swag).
 - [gin v1](./ginv1/README.md)
 - [fiber v2](./fiberv2/README.md)
 - [fiber v3](./fiberv3/README.md)
+- [net/http](./nethttp/README.md)
