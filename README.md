@@ -10,4 +10,5 @@ For generation, use tools like [swaggo](https://github.com/swaggo/swag).
 - [echo v4](./echov4/README.md)
 - [echo v5](./echov5/README.md)
 - [gin v1](./ginv1/README.md)
+- [fiber v2](./fiberv2/README.md)
 - [fiber v3](./fiberv3/README.md)
