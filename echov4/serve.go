@@ -8,7 +8,12 @@ import (
 	swagger "github.com/myyrakle/go-swagger-ui"
 )
 
-// /
+// Serve registers Swagger UI handlers on the Echo instance under prefix.
+//
+// It serves the embedded Swagger UI index page and static assets from prefix.
+// specBytes is used only to choose the index page: valid JSON specs load
+// ./doc.json, and all other specs load ./doc.yaml. The caller must register the
+// matching doc.json or doc.yaml endpoint under the same prefix.
 func Serve(e *echo.Echo, prefix string, specBytes []byte) {
 	isJSON := json.Valid(specBytes)
 

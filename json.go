@@ -14,6 +14,8 @@ const (
 	SchemeHTTPS Scheme = "https"
 )
 
+// PreprocessSchemeInJSONSpec moves preferredScheme to the front of a JSON
+// Swagger spec's schemes list when that scheme is present.
 func PreprocessSchemeInJSONSpec(specSource []byte, preferredScheme Scheme) ([]byte, error) {
 	var spec map[string]any
 	if err := json.Unmarshal([]byte(specSource), &spec); err != nil {
@@ -30,6 +32,8 @@ func PreprocessSchemeInJSONSpec(specSource []byte, preferredScheme Scheme) ([]by
 	return out, nil
 }
 
+// PreprocessSchemeInYAMLSpec moves preferredScheme to the front of a YAML
+// Swagger spec's schemes list when that scheme is present.
 func PreprocessSchemeInYAMLSpec(specSource []byte, preferredScheme Scheme) ([]byte, error) {
 	var spec map[string]any
 	if err := yaml.Unmarshal(specSource, &spec); err != nil {
