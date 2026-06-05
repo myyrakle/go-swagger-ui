@@ -1,5 +1,5 @@
-// Package swagger는 Swagger UI v5.32.6 정적 리소스를 임베드하여
-// echo 라우터에서 서빙할 수 있는 핸들러를 제공합니다.
+// Package swagger embeds Swagger UI v5.32.6 static resources and provides
+// handlers that can serve them from an echo router.
 package swagger
 
 import (
@@ -7,7 +7,7 @@ import (
 	"encoding/base64"
 )
 
-// Favicon16PNG, Favicon32PNG는 favicon.go에 base64로 선언된 PNG를 디코드한 바이트입니다.
+// Favicon16PNG and Favicon32PNG are the decoded bytes of the PNGs declared as base64 in favicon.go.
 var (
 	Favicon16PNG = mustDecodeBase64(Favicon16)
 	Favicon32PNG = mustDecodeBase64(Favicon32)
@@ -21,7 +21,7 @@ func mustDecodeBase64(s string) []byte {
 	return b
 }
 
-// SwaggerUIVersion은 임베드된 Swagger UI 배포본 버전입니다.
+// SwaggerUIVersion is the embedded Swagger UI distribution version.
 const SwaggerUIVersion = "5.32.6"
 
 //go:embed dist/swagger-ui.css
@@ -36,8 +36,8 @@ var SwaggerUIBundleJS string
 //go:embed dist/swagger-ui-standalone-preset.js
 var SwaggerUIStandalonePresetJS string
 
-// JSONIndexHTML은 임베드된 자산을 로드하고 같은 prefix의 ./doc.json을 스펙으로 사용하는
-// Swagger UI 엔트리 HTML입니다.
+// JSONIndexHTML is the Swagger UI entry HTML that loads embedded assets and uses
+// ./doc.json from the same prefix as the spec.
 const JSONIndexHTML = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,8 +95,8 @@ const JSONIndexHTML = `<!DOCTYPE html>
 </body>
 </html>`
 
-// YAMLIndexHTML은 임베드된 자산을 로드하고 같은 prefix의 ./doc.yaml을 스펙으로 사용하는
-// Swagger UI 엔트리 HTML입니다.
+// YAMLIndexHTML is the Swagger UI entry HTML that loads embedded assets and uses
+// ./doc.yaml from the same prefix as the spec.
 const YAMLIndexHTML = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -154,5 +154,5 @@ const YAMLIndexHTML = `<!DOCTYPE html>
 </body>
 </html>`
 
-// IndexHTML은 기존 사용자를 위한 JSONIndexHTML 별칭입니다.
+// IndexHTML is an alias for JSONIndexHTML for existing users.
 const IndexHTML = JSONIndexHTML
