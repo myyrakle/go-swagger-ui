@@ -6,7 +6,7 @@
 ## Setup
 
 ```sh
-go get github.com/myyrakle/go-swagger-ui/nethttp@v0.1.10
+go get github.com/myyrakle/go-swagger-ui/nethttp@v0.2.0
 ```
 
 ## With Swagger JSON File

@@ -6,7 +6,7 @@
 ## Setup
 
 ```sh
-go get github.com/myyrakle/go-swagger-ui/echov5@v0.1.10
+go get github.com/myyrakle/go-swagger-ui/echov5@v0.2.0
 ```
 
 ## With Swagger JSON File

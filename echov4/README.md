@@ -1,14 +1,15 @@
 # echo v4 swagger ui
+
 - swagger ui server for echo/v4 user
 - minimum version: echo/v4.0.0, golang/v1.16.0
 
-## Setup 
+## Setup
 
 ```
-go get github.com/myyrakle/go-swagger-ui/echov4@v0.1.10
+go get github.com/myyrakle/go-swagger-ui/echov4@v0.2.0
 ```
 
-## with swagger JSON file 
+## with swagger JSON file
 
 ```go
 package main
@@ -45,7 +46,7 @@ func main() {
 
 ```
 
-## with swagger YAML file 
+## with swagger YAML file
 
 ```go
 package main
